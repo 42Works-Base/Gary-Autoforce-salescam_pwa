@@ -1,0 +1,163 @@
+<div class="video-landing-page-wrapper">
+	<div class="video-landing-page-text-wrap" *ngIf="status=='ONLINE'">
+	 	<app-loader [loading]="loading"></app-loader>
+		<div class="video-inner-text-wrap" *ngIf="!loading">
+		
+		 <!-- [class.dark-theme]="settings.theme=='Dark'"  [class.light-theme]="settings.theme=='Light'" [ngStyle]="getCustomStyle()" *ngIf="settings.top_banner==null" -->		 
+		  <div class="video-logo-wrap">
+			  <img src="{{settings.logo}}" alt="img" *ngIf="settings.logo!=null" />
+        <img src="assets/img/login_logo.png" alt="img" *ngIf="settings.logo==null" />
+			</div>			 
+			<div class="video-guide-text video-top-guide-text" [innerHTML]="settings.salescam_home_content"></div>
+			<div class="expired-message-section" *ngIf="service_request.isLandingPageExpired==1">
+			  <h1>Sorry</h1>
+				<p>This video has now expired</p> 
+			</div>	
+			<div class="video-iframe-wrapper" *ngIf="service_request.post_id!=null && service_request.isLandingPageExpired!=1" (click)="updatePlayVideoStats()">
+			  <iframe width="100%" height="315" id="videoplayer" [src]='safeSrc' frameborder="0" allow="autoplay; fullscreen" allowfullscreen ></iframe>	
+			</div>
+			<div class="video-guide-text video-top-guide-text" *ngIf="service_request.post_id==null">
+        <p>No video yet.</p>
+      </div>			  
+			<div id="reviewPopup" class="review-section" style="display:none;">
+			  <div class="row">
+				  <div class="col-md-12">
+				    <img src="assets/img/review-star.png" alt="img" />
+				    <h3>Would you like to review your experience with us?</h3>
+				    <a class="btn btn-primary yes-review" href="{{review_location_link}}">Yes</a>
+				    <button class="btn no-review" id="closeReview">Not Now</button>
+				  </div>
+			  </div>
+			</div>			
+			<p class="video-guide-text video-top-guide-text">
+			  {{settings.salescam_below_video_content}}
+			</p>			 
+			<div class="infoMessages pos-absolute">
+        <div class="alert alert-danger {{ animate }} animated" *ngIf="error_msg != null ">
+          {{error_msg}} <span class="cross" (click)="hideMessages()">X</span>
+        </div>
+        <div class="alert alert-success {{ animate }} animated" *ngIf="success_msg != null ">
+          {{success_msg}} <span class="cross" (click)="hideMessages()">X</span>
+        </div>
+      </div>			 
+		  <!--buttons for mobile-->
+      <div class="video-buttons-wrap">
+        <div class="btn-wrap">
+          <a class="click-btn" (click)="initCall()" href="tel:{{service_request?.phone}}">
+            <img src="assets/img/call.png" alt="Call"/>Click<br>to Call
+          </a>
+        </div>
+        <div class="btn-wrap"> 
+          <a class="click-btn" (click)="checkIfNotMobile()" [attr.href]="safeSMSSrc">
+            <img src="assets/img/chat.png" alt="SMS"/>Click<br>to Text
+          </a>
+        </div>
+      </div>
+			<!--buttons for mobile end-->			 
+      <div class="video-page-contact-detail">
+        <div class="location-address text-center" *ngIf="settings.contact_details_line1!=null || settings.contact_details_line2!=null || settings.contact_details_line3!=null">
+          <p>{{ settings.contact_details_line1}}</p>
+		      <p *ngIf="settings.contact_details_line2 != null">{{settings.contact_details_line2}}</p>
+		      <p *ngIf="settings.contact_details_line3 != null">{{settings.contact_details_line3}}</p>
+        </div>			   
+        <!--div class="video-detail-right" *ngIf="settings.contact_details_line1!=null || settings.contact_details_line2!=null || settings.contact_details_line3!=null">
+          <a href="{{review_location_link}}">Review Us</a>
+        </div>
+        <div class="video-detail-center" *ngIf="settings.contact_details_line1==null && settings.contact_details_line2==null && settings.contact_details_line3==null">
+          <a href="{{review_location_link}}">Review Us</a>
+        </div-->			   
+      </div>
+		</div>		  
+	</div>
+	
+	<footer class="video-footer-wrap" *ngIf="status=='ONLINE'">		
+    <div class="row text-center">
+      <div class="col-md-12 my-2">
+        <a *ngIf="environment" href="{{environment.website}}">
+          <img src="assets/img/video-footer-logo.png" class="video-white-logo-img" alt="AutoForce"/>
+          <!--img src="assets/img/video-footer-m-logo.jpg" class="video-color-logo-img" alt="img"/-->
+        </a>
+      </div>
+      <div class="col-md-12 mb-4">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{service_request.landing_page_link}}" class="mx-1" target="_blank">
+          <img src="assets/img/fb.png" class="img-fluid" style="width: 25px;" alt="Share with facebook"/>
+        </a>
+        <a href="https://twitter.com/intent/tweet?url={{service_request.landing_page_link}}" class="mx-1" target="_blank">
+          <img src="assets/img/x.png" class="img-fluid" style="width: 25px;" alt="Share with twitter"/>
+        </a>
+        <a href="mailto:?body={{service_request.landing_page_link}}" class="mx-1">
+          <img src="assets/img/mail.png" class="img-fluid" style="width: 25px; border-radius: 30%;" alt="Share with mail"/>
+        </a>
+      </div>
+    </div>
+	</footer>	
+	<div id="content-wrapper" class="video-landing-page-text-wrap" *ngIf="status=='OFFLINE'">
+    <div class="container-fluid customer_review_main_wrap">
+      <div class="row customer_review_inner_wrap">
+        <div class="col-md-12">
+          <div class="customer_reviews_text review_thanks_text not_internet_connection">
+            <img src="assets/img/no-connection.png" alt="img"/> 
+            <h1>Ooops!</h1>
+            <p>No internet Connection Found. <br>
+              Please Check Your internet Connection
+            </p>
+          </div>
+          <div class="clearfix"></div>
+          <div class="connecting" style="position:relative">
+            Reconnecting...
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>		
+	<!--div class="twilio-chat-section container" style="display:none;">
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" id="closeChat">X</button>
+                <div id="status-row" class="row disconnected" style="display:none;">
+                    <!-<div class="col-md-5 left-align">
+                      <span id="delete-channel-span"><b>Delete current channel</b></span>
+                    </div>->
+                    <div class="col-md-12 right-align">
+                      <span id="status-span">Connected as <b><span id="username-span"></span></b></span>
+                      <span id="leave-span"><b>x Leave</b></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="container" class="row">
+            <div id="channel-panel" class="col-md-offset-2 col-md-2" style="display:none">
+            <div id="channel-list" class="row not-showing"></div>
+            <div id="new-channel-input-row" class="row not-showing">
+            <textarea placeholder="Type channel name" id="new-channel-input" rows="1" maxlength="20" class="channel-element"></textarea>
+            </div>
+            <!- <div class="row">
+            <img id="add-channel-image" src="./assets/img/add-channel-image.png"/>
+            </div>->
+            </div>
+            <div id="chat-window" class="col-md-12 with-shadow">                
+                <div class="chat_unavailable" [ngStyle]="{'display': chat_offline === true ? 'flex' : 'none'}">
+                    Apologies, our online chat service is currently unavailable. Please try again later or feel free to give us a call by pressing the Click to Call button.
+                </div>
+                <div  class="chat_available" [ngStyle]="{'display': chat_offline === false ? 'block' : 'none'}">
+                    <div id="message-list" class="row disconnected"></div>
+                    <div id="typing-row" class="row disconnected">
+                        <p id="typing-placeholder"></p>
+                    </div>
+                    <div id="input-div" class="row">
+                        <textarea id="input-text" disabled="true" placeholder="Your message" style="width:225px;"></textarea>                        
+                        <a href="javascript:;" id="send-chat" disabled="true" class="add_new_button">Send</a>
+                    </div>
+                    <div id="connect-panel" class="disconnected row with-shadow" style="display:none;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img id="connect-image" src="./assets/img/connect-image.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div-->
+</div>

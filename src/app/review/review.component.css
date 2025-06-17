@@ -1,0 +1,19 @@
+.go_back{
+    position: absolute;
+    top: 0;
+    left: 18px;
+    font-size: 38px;
+    background: 0 0!important;
+    color: red!important;
+    font-weight: 700;
+}
+
+a.go_back img {
+    height: 36px;
+}
+
+.review_content_wraper .customer_reviews_logo {
+  
+    /* display: none; */
+    visibility: hidden;
+}

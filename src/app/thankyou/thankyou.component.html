@@ -1,0 +1,33 @@
+  <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="content-wrapper" class="review_content_wraper">
+        <div class="container-fluid customer_review_main_wrap">
+          
+          <div class="row customer_review_inner_wrap">
+          	 <div class="col-md-12">
+	          	   <div class="customer_reviews_logo" *ngIf="location.business_logo_url != null" >
+                                  <img src="{{location.business_logo_url}}" alt="img">
+                  </div>
+
+                  <div class="customer_reviews_logo" *ngIf="location.business_logo_url == null" >
+                                  <img src="assets/img/login_logo.png" alt="img">
+                    </div>   
+	          	   <div class="customer_reviews_text review_thanks_text">
+                  <i class="fas fa-check"></i>
+	          	   	<h1>Thank You</h1>
+                    <p>We appreciate you taking the time to send us your feedback.</p>
+		          	   <!--p *ngIf="location.welcome_msg != null">{{location?.welcome_msg}}</p>
+	                 <p *ngIf="location.welcome_msg == null">Welcome to Autoforce</p-->
+	          	   </div>
+                 <a class="back_tohome_btn" href="javascript:;" routerLink="/{{group_id}}/{{location_id}}">Back To Home</a>
+          	 </div>
+          </div>
+        </div>
+        <!-- /.container-fluid -->
+        <!-- Sticky Footer -->
+
+      </div>
+      <!-- /.content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->

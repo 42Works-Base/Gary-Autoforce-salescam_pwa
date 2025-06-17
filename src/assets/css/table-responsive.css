@@ -1,0 +1,66 @@
+@media all and (max-width:768px){
+
+}
+
+  /*--table responsive--*/
+@media all and (max-width:0px){
+
+  table, 
+  table thead, 
+  table tbody, 
+  table th, 
+   table td, 
+   table tr { 
+    display: block; 
+  }
+ 
+  /* Hide table headers (but not display: none;, for accessibility) */
+  table thead tr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+ 
+  table tr {
+    border-bottom: 2px solid #46b2f2;
+}
+ 
+   table td { 
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee; 
+    position: relative;
+    /*padding-left: 50%; */
+    white-space: normal;
+    text-align:left;
+  }
+ 
+  table td:before { 
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%; 
+    padding-right: 10px; 
+    white-space: nowrap;
+    text-align:left;
+    font-weight: bold;
+  }
+ 
+  /*
+  Label the data
+  */
+   table td:before { content: attr(data-title); }
+         .product-list-body .table_back .table_bg table {
+    width: 100% !important;
+}
+.add-product-main .can_qury a {
+    padding: 6px 6px 5px 9px;
+}
+.add-product-main .sub_query_btn {
+    padding-left: 0px;
+    margin: -1px 7px;
+}
+  /*--table responsive---*/   
+}

@@ -1,0 +1,10 @@
+.location-address{
+    width: 100%;
+    font-size: 19px;
+	font-weight: 500;
+}
+.video-buttons-wrap .btn-wrap img {
+    width: 55px;
+    display: table;
+    margin: 0 auto 6px;
+}
